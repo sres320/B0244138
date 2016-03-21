@@ -258,3 +258,21 @@ x <- c(1, 2, NA, 4, NA, 5)
 x[! is.na(x)]
 x[! complete.cases(x)]
 
+
+#練習訪法1
+if (!require('SportsAnalytics')){
+  install.packages("SportsAnalytics")
+  library(SportsAnalytics)
+}
+NBA1415<-fetch_NBAPlayerStatistics("14-15")
+for(i in 1:nrow(NBA1415)){
+  if(NBA1415[i,"GamesPlayed"]>70&NBA1415[i,"TotalPoints"]>1500){
+    print(NBA1415[i,c("Name","Team","Position")])
+  }
+}
+#練習訪法2
+subset(NBA1415,GamesPlayed>70&TotalPoints>1500)[,c("Name","Team","Position")]
+#練習訪法3
+NBA1415[NBA1415$GamesPlayed>70&NBA1415$TotalPoints>1500,c("Name","Team","Position")]
+
+
